@@ -26,3 +26,7 @@ package.
 
 Check TestResult.xml periodically and pop up the results buffer
 when there are changes.
+
+    M-x nunit-results-stop-watching
+
+Stop the watcher.
