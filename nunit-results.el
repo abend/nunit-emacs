@@ -39,7 +39,7 @@
 ;;
 ;; Installation:
 ;;
-;; Put nunit-results.el into your `load-path' 
+;; Put nunit-results.el into your `load-path'
 ;; and add (require 'nunit-results) to your init file.
 
 ;;; Code:
@@ -90,7 +90,9 @@
 
 (defun nunit-results-show (file)
   (interactive (list (nunit-results-find-file)))
+  (nunit-results-show-file file))
 
+(defun nunit-results-show-file (file)
   (flet ((key (key alist)
            (string-to-int (cdr (assoc key alist))))
 
@@ -166,7 +168,7 @@
   (interactive (list (nunit-results-find-file)))
   (nunit-results-stop-watching)
   (message "Starting nunit-results watcher.")
-  (setq nunit-results-timer 
+  (setq nunit-results-timer
         (run-with-timer
          0 5
          (lambda (f)
