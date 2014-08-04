@@ -73,11 +73,25 @@
   "Face used to display a successful test result."
   :group 'nunit-results)
 
+(defcustom nunit-results-default-filename "TestResult.xml"
+  "Default filename for the test results file written by the
+nunit process."
+  :group 'nunit-results)
+
+(defun nunit-results-default-dir ()
+    (locate-dominating-file default-directory
+                            nunit-results-default-filename))
+
+(defun nunit-results-default-file ()
+  (let* ((file nunit-results-default-filename)
+         (dir (nunit-results-default-dir)))
+    (when dir (concat dir file))))
+
 (defun nunit-results-find-file ()
-  (let* ((file "TestResult.xml")
-         (dir (locate-dominating-file default-directory file))
-         (path (when dir (concat dir file))))
-    (read-file-name "Test results file: " dir nil nil (and dir file))))
+  (read-file-name "Test results file: "
+                  (nunit-results-default-dir)
+                  nil nil
+                  nunit-results-default-filename))
 
 (defun nunit-results-search-tree (xml fun)
   (when (consp xml)
